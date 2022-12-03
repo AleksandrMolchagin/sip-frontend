@@ -1,0 +1,7 @@
+.ResultItemContainer{
+   background-color: white;
+   max-width: 600px;
+   padding: 12px;
+   border-radius: 12px;
+   border-color: grey;
+}
