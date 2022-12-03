@@ -1,6 +1,6 @@
 import './ResultItem.css'
 
-interface ResultItemProps {
+export interface ResultItemProps {
   title: string;
   description: string;
   url: string;

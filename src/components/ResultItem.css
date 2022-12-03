@@ -5,3 +5,21 @@
    border-radius: 12px;
    border-color: grey;
 }
+
+.ResultItemContainer > a > cite {
+    font-size: 12px;
+    font-style: normal;
+    color: grey;
+    padding: 0px;
+    margin: 0px;
+}
+.ResultItemContainer > a {
+    padding: 0px;
+    margin: 0px;
+}
+
+.ResultItemContainer > a > h3{
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+}
