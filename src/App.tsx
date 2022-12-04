@@ -36,6 +36,7 @@ function App() {
     setItems(items);
   }
 
+  
   async function getGoogleResults() {
     await axios
       .get("http://localhost:4000/getGoogleResults", {
@@ -64,7 +65,11 @@ function App() {
       <div
         className={firstSearchDone ? "SearchInProgress" : "SearchBarContainer"}
       >
-        <h1 className="CenterText Logo">AI Search</h1>
+        <div className="TitleContainer">
+          <img src="/logo1024.png" className="LogoIconText"></img>
+          <h1 className="CenterText LogoText">search</h1>
+
+        </div>
         <SearchBar
           searchValue={searchValue}
           setSearchValue={setSearchValue}

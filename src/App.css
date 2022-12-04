@@ -22,6 +22,31 @@
     transition: all 0.2s ease-in-out;
 }
 
+.TitleContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.LogoText{
+    margin-top: 12px;
+    font-size: 50px;
+}
+
+.LogoIconText{
+    width: fit-content;
+    height: 100px;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.LogoIcon{
+    width: fit-content;
+    height: 25px;
+}
+
+
 .ResultsContainer{
     display: flex;
     flex-direction: column;
@@ -29,6 +54,3 @@
 
 }
 
-.Logo{
-    margin-bottom: 24px;
-}

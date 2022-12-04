@@ -22,9 +22,11 @@ export function SearchBar(props: SearchBarProps): JSX.Element {
           value={props.searchValue}
         />
         <InputGroup.Button
+          color="red"
+          appearance="primary"
           onClick={props.handleOnSearchClick} 
         >
-          <SearchIcon />
+          <img src="/SearchIcon.png" className="LogoIcon"></img>
         </InputGroup.Button>
       </InputGroup>
     </>
