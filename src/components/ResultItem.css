@@ -4,7 +4,21 @@
    padding: 12px;
    border-radius: 12px;
    border-color: grey;
+   transition: all 0.2s ease-in-out;
 }
+
+.ResultItemContainer:hover{
+    scale: 1.02;
+}
+
+.LeftItem:hover{
+    transform: translateX(-10px);
+}
+
+.RightItem:hover{
+    transform: translateX(10px);
+}
+
 
 .ResultItemContainer > a > cite {
     font-size: 12px;
@@ -22,4 +36,12 @@
     font-size: 20px;
     padding: 0px;
     margin: 0px;
+    color: var(--blue);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ResultItemContainer > p{
+    color: var(--grey);
 }
