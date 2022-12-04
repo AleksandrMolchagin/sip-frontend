@@ -21,3 +21,14 @@ code {
 .CenterText{
     text-align: center;
 }
+
+.disable-underline:link { text-decoration: none; }
+
+
+.disable-underline:visited { text-decoration: none; }
+
+
+.disable-underline:hover { text-decoration: none; }
+
+
+.disable-underline:active { text-decoration: none; }

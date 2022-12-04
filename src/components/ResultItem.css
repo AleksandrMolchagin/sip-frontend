@@ -9,6 +9,8 @@
 
 .ResultItemContainer:hover{
     scale: 1.02;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
 }
 
 .LeftItem:hover{
@@ -36,6 +38,7 @@
     font-size: 20px;
     padding: 0px;
     margin: 0px;
+    margin-top: -5px;
     color: var(--blue);
     white-space: nowrap;
     overflow: hidden;
@@ -45,3 +48,18 @@
 .ResultItemContainer > p{
     color: var(--grey);
 }
+
+.ResultItemDescription{
+    font-size: 14px;
+    color: var(--grey);
+}
+
+.ResultItemExplanationNOitalic{
+    font-size: 12px;
+}
+
+.ResultItemExplanation{
+    font-size: 12px;
+    font-style: italic;
+}
+

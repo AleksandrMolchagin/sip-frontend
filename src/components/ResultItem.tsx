@@ -11,17 +11,17 @@ export interface ResultItemProps {
 
 export function ResultItem(props: ResultItemProps): JSX.Element {
   return (
-    <a href={props.url} target="_blank" rel="noopener noreferrer">
+    <a className="disable-underline" href={props.url} target="_blank" rel="noopener noreferrer">
         <div className={"ResultItemContainer " + (props.left ? " LeftItem" : " RightItem")  } >
         <a href={props.url} target="_blank" rel="noopener noreferrer">
             <cite role="text"> {props.url} </cite>
         </a>
 
-        <a href={props.url} target="_blank" rel="noreferrer">
+        <a href={props.url} target="_blank" rel="noreferrer" className='disable-underline'>
             <h3>{props.title}</h3>
         </a>
-        <p>{props.description}</p>
-        <p>{props.ai_explanation}</p>
+        <p className='ResultItemDescription'>{props.description}</p>
+        <p className='ResultItemExplanationNOitalic'>AI Comment:<span className='ResultItemExplanation'> {props.ai_explanation}</span></p>
         </div>
     </a>
   );

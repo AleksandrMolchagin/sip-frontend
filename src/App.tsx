@@ -5,6 +5,8 @@ import { SearchBar } from "./components/SearchBar";
 import axios from "axios";
 import { ResultItemProps } from "./components/ResultItem";
 import { Message, useToaster, Badge } from "rsuite";
+import {WebSockets} from "./websocket";
+import { Progress } from 'rsuite';
 
 function App() {
   const [searchValue, setSearchValue] = React.useState<string>("");
@@ -15,6 +17,8 @@ function App() {
   const [rightCategory, setRightCategory] = React.useState<string>("");
   const [leftItems, setLeftItems] = React.useState<ResultItemProps[]>([]);
   const [rightItems, setRightItems] = React.useState<ResultItemProps[]>([]);
+  const [webSocketUserID, setWebSocketUserID] = React.useState<string>("");
+  const [progress, setProgress] = React.useState<number>(0);
 
   const toaster = useToaster();
 
@@ -23,28 +27,36 @@ function App() {
       return;
     }
     setSearching(true);
-    await getGoogleResults();
     setFirstSearchDone(true);
+    await getClassifiedResults();
   }
 
   function parseClassifiedResults(data: any){
+    console.log(data)
     const results = data.finalResults;
     const items: ResultItemProps[] = [];
     for (let i = 0; i < results.length; i++) {
       const result = results[i];
       items.push({
-        title: result.title,
-        description: result.snippet,
-        url: result.link,
-        ai_explanation: result.ai_explanation,
-        classification: result.classification,
+        title: result.title || "",
+        description: result.description || "",
+        url: result.url || "",
+        ai_explanation: result.ai_explanation || "",
+        classification: result.classification || "",
       });
     }
     setLeftCategory(data.categories[0]);
     setRightCategory(data.categories[1]);
     setItems(items);
-    setLeftItems(items.filter((item, index) => item.classification?.toLowerCase().includes(leftCategory.toLowerCase())));
-    setRightItems(items.filter((item, index) => item.classification?.toLowerCase().includes(rightCategory.toLowerCase())));
+    console.log(
+      "left: " + items[0].classification?.toLowerCase() + " - " + data.categories[0].toLowerCase()
+    )
+    const newLeftItems = items.filter((item, index) => item.classification?.toLowerCase().includes(data.categories[0].toLowerCase()))
+    const newRightItems = items.filter((item, index) => item.classification?.toLowerCase().includes(data.categories[1].toLowerCase()))
+    console.log(newLeftItems)
+    console.log(newRightItems)
+    setLeftItems(newLeftItems);
+    setRightItems(newRightItems);
   }
 
   function parseGoogleResults(data: any) {
@@ -63,16 +75,19 @@ function App() {
   }
 
   //http://localhost:4000/getGoogleResults  
-  async function getGoogleResults() {
+  async function getClassifiedResults() {
+
     await axios
       .post("http://localhost:4000/getClassifiedResults", {
-        headers: {
-          query: searchValue,
-        },
-      })
+        query: searchValue,
+        userID: webSocketUserID,
+
+      }
+      )
       .then((response) => {
-        parseGoogleResults(response.data);
+        parseClassifiedResults(response.data);
         setSearching(false);
+        setProgress(0);
       })
       .catch((error) => {
         console.log(error);
@@ -97,6 +112,7 @@ function App() {
 
   return (
     <div className="MainContainer">
+      <WebSockets setWebSocketUserID={setWebSocketUserID} setProgress={setProgress} />
       <div
         className={firstSearchDone ? "SearchInProgress" : "SearchBarContainer"}
       >
@@ -112,7 +128,7 @@ function App() {
         />
       </div>
       {
-        searching && <h1 className="CenterText"></h1>
+        searching &&  <div className="ProgressBar"><Progress.Line percent={progress} status="active" /></div>
       }
       {firstSearchDone &&
         !searching &&
@@ -149,5 +165,7 @@ function ListOfItems(props: {items: ResultItemProps[], left: boolean}): JSX.Elem
     </div>
   );
 }
+
+
 
 export default App;
